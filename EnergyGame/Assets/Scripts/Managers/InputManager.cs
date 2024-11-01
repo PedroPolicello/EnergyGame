@@ -10,6 +10,8 @@ public class InputManager : MonoBehaviour
 
     public Vector2 Move => inputControls.Player.Movement.ReadValue<Vector2>();
 
+    public Type near;
+
     public InputManager()
     {
         Instance = this;
@@ -27,7 +29,19 @@ public class InputManager : MonoBehaviour
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)
     {
-        
+        switch (near)
+        {
+            case Type.Teleport:
+                print("teleporting...");
+                break;
+
+            case Type.Construct:
+                print("constructing..."); 
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void EnableMovement() => inputControls.Player.Movement.Enable();
