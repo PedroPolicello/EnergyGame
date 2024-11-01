@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -19,6 +17,9 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        InputManager.Instance.near = GameManager.Instance.interactable.interactType;
+        if (collision.CompareTag("Interactable"))
+        {
+            InputManager.Instance.near = GameManager.Instance.interactable.interactType;
+        }
     }
 }

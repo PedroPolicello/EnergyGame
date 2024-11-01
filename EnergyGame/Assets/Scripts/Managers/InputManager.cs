@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 Move => inputControls.Player.Movement.ReadValue<Vector2>();
 
-    public Type near;
+    public InteractType near;
 
     public InputManager()
     {
@@ -31,11 +31,11 @@ public class InputManager : MonoBehaviour
     {
         switch (near)
         {
-            case Type.Teleport:
+            case InteractType.Teleport:
                 print("teleporting...");
                 break;
 
-            case Type.Construct:
+            case InteractType.Construct:
                 print("constructing..."); 
                 break;
 

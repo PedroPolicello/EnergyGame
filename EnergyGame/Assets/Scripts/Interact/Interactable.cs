@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Interactable : MonoBehaviour
 {
-    public Type interactType;
+    public InteractType interactType;
 
-    [SerializeField] private string interactText;
+    [SerializeField] [TextArea(3, 8)] private string interactText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
