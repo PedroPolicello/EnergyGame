@@ -33,13 +33,13 @@ public class InputManager : MonoBehaviour
         {
             case InteractType.BiomassMinigame:
                 GameManager.Instance.minigameController.BiomassMinigame(true);
-                ResetInteract();
+                GameManager.Instance.interactEnum.principalInteractType = InteractType.BiomassGenerator;
                 break;
 
             case InteractType.BiomassGenerator:
                 GameManager.Instance.biomassGenerator.AddEnergy(GameManager.Instance.playerControl.fuelAmount);
                 GameManager.Instance.playerControl.ResetFuel();
-                ResetInteract();
+                //print("adding fuel...");
                 break;
             
             case InteractType.HidricMinigame:
@@ -47,17 +47,29 @@ public class InputManager : MonoBehaviour
                 break;
 
             case InteractType.HidricGenerator:
-                print("rotating Pipes..."); 
+                print("rotating pipes..."); 
+                break;
+            
+            case InteractType.EolicMinigame:
+                print("starting eolic minigame..."); 
+                break;
+            
+            case InteractType.EolicGenerator:
+                print("rotating generator..."); 
+                break;
+            
+            case InteractType.Sell:
+                GameManager.Instance.vendorManager.SellEnergy();
+                //print("selling energy..."); 
+                break;
+            
+            case InteractType.Buy:
+                GameManager.Instance.vendorManager.BuyNextMinigame();
                 break;
             
             default:
                 break;
         }
-    }
-
-    void ResetInteract()
-    {
-        GameManager.Instance.interactEnum.principalInteractType = InteractType.None;
     }
 
     public void EnableMovement() => inputControls.Player.Movement.Enable();

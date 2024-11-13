@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public InteractEnum interactEnum;
     public UIManager uiManager;
     public MinigameController minigameController;
+    public VendorManager vendorManager;
 
     [Header("Generators")]
     public BiomassGenerator biomassGenerator;

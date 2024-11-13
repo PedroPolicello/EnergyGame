@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -9,12 +10,25 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject textbox;
     [SerializeField] private TextMeshProUGUI UIText;
     [SerializeField] private Image iconImage;
+    [SerializeField] private int countdown;
+    [SerializeField] private TextMeshProUGUI countdownText;
+
+    [Header("Energy/Money Info")] 
+    public int energy;
+    public int money;
+    [SerializeField] private GameObject topUI;
+    [SerializeField] private TextMeshProUGUI energyText;
+    [SerializeField] private TextMeshProUGUI moneyText;
 
     [Header("Biomass Info")]
     [SerializeField] private int score;
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private int countdown;
-    [SerializeField] private TextMeshProUGUI countdownText;
+
+    private void Awake()
+    {
+        moneyText.text = $"Money: {money}";
+        energyText.text = $"Energy: {energy}";
+    }
 
     public void Textbox(bool isVisible, string text)
     {
@@ -29,7 +43,7 @@ public class UIManager : MonoBehaviour
             UIText.text = text;
         }
     }
-
+    
     public void Icon(bool isVisible, Sprite sprite)
     {
         if (isVisible)
@@ -43,6 +57,42 @@ public class UIManager : MonoBehaviour
             iconImage.gameObject.SetActive(false);
         }
     }
+
+    public void TopUI(bool isVisible)
+    {
+        if(isVisible) topUI.SetActive(true);
+        else topUI.SetActive(false);
+    }
+
+    #region Money
+
+    public void AddMoney(int value)
+    {
+        money += value;
+        moneyText.text = $"Money: {money}";
+    }
+    public void RemoveMoney(int value)
+    {
+        money -= value;
+        moneyText.text = $"Money: {money}";
+    }
+    
+    #endregion
+    #region Energy
+
+    public void AddEnergy(int value)
+    {
+        energy += value;
+        energyText.text = $"Energy: {energy}";
+    }
+    public void RemoveEnergy(int value)
+    {
+        energy -= value;
+        energyText.text = $"Energy: {energy}";
+    }
+    
+    #endregion
+    #region Countdown
 
     public void CallCountdown() => StartCoroutine(Countdown());
     IEnumerator Countdown()
@@ -58,27 +108,19 @@ public class UIManager : MonoBehaviour
         countdownText.gameObject.SetActive(false);
     }
 
+    #endregion
     #region BiomassUI
-
+    
     public void AddScore(int value)
     {
         score += value;
-        UpdateUIScore();
+        scoreText.text = $"Score: {score}";
     }
-
     public void RemoveScore(int value)
     {
         score -= value;
-        UpdateUIScore();
-    }
-
-
-    void UpdateUIScore()
-    {
         scoreText.text = $"Score: {score}";
     }
     
-    
-
     #endregion
 }

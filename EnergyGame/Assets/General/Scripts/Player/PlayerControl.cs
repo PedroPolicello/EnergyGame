@@ -29,8 +29,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Interactable")) InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
-        //print(GameManager.Instance.interactEnum.principalInteractType);
+        if (collision.CompareTag("Interactable"))
+        {
+            InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
+            //print(GameManager.Instance.interactEnum.principalInteractType);
+        }
 
         #region Biomass Minigame
 
@@ -49,13 +52,7 @@ public class PlayerControl : MonoBehaviour
         
         #endregion
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Interactable")) InputManager.Instance.near = InteractType.None;
-    }
-
-
+    
     public void ResetFuel()
     {
         fuelCollected = 0;

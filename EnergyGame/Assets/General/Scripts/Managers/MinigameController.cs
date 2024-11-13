@@ -10,13 +10,13 @@ public class MinigameController : MonoBehaviour
     [Header("Minigame Objects")]
     [SerializeField] private GameObject biomassMinigame;
     [SerializeField] private GameObject hidricMinigame;
-    [SerializeField] private GameObject xMinigame;
+    [SerializeField] private GameObject eolicMinigame;
 
     [Header("Player Pos")]
     [SerializeField] private Vector2 startPos;
     [SerializeField] private Vector2 biomassPos;
     [SerializeField] private Vector2 hidricPos;
-    [SerializeField] private Vector2 xPos;
+    [SerializeField] private Vector2 eolicPos;
 
     [Header("Other Info")]
     [SerializeField] private GameObject player;
@@ -28,11 +28,12 @@ public class MinigameController : MonoBehaviour
     public bool fadeFinished = true;
     public bool biomassFinished;
     public bool hidricFinished;
+    public bool eolicFinished;
 
     [Header("Generator Info")] 
-    [SerializeField] private GameObject biomass;
-    [SerializeField] private GameObject hidric;
-    [SerializeField] private GameObject x;
+    public GameObject biomass;
+    public GameObject hidric;
+    public GameObject eolic;
 
     public void BiomassMinigame(bool isStarting)
     {
@@ -55,8 +56,11 @@ public class MinigameController : MonoBehaviour
         GameManager.Instance.InputManager.DisableMovement();
         fade.DOFade(1, fadeDuration);
         yield return new WaitForSeconds(fadeDuration);
+        
         cam.ForceCameraPosition(position, Quaternion.identity);
+        GameManager.Instance.uiManager.TopUI(false);
         player.transform.position = position;
+        
         fade.DOFade(0, fadeDuration * 2);
         yield return new WaitForSeconds(fadeDuration);
 
@@ -81,12 +85,16 @@ public class MinigameController : MonoBehaviour
         {
             case 1:
                 biomassFinished = true;
+                GameManager.Instance.uiManager.TopUI(true);
                 biomass.GetComponent<Interactable>().isComplete = true;
+                biomass.GetComponent<Generator>().enabled = true;
                 break;
             
             case 2:
                 hidricFinished = true;
+                GameManager.Instance.uiManager.TopUI(true);
                 hidric.GetComponent<Interactable>().isComplete = true;
+                hidric.GetComponent<Interactable>().enabled = true;
                 break;
             
             default:

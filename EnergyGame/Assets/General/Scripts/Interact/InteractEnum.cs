@@ -16,6 +16,10 @@ public enum InteractType
     None,
     BiomassMinigame,
     HidricMinigame,
+    EolicMinigame,
     BiomassGenerator,
-    HidricGenerator
+    HidricGenerator,
+    EolicGenerator,
+    Sell,
+    Buy
 }

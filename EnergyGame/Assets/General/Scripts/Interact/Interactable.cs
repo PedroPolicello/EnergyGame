@@ -10,8 +10,7 @@ public class Interactable : MonoBehaviour
     
     [Header("TextBox")]
     [SerializeField] private bool useTextBox;
-    [SerializeField] [TextArea(3, 8)] private string interactText;
-    [SerializeField] [TextArea(3, 8)] private string finishedInteractText;
+    [SerializeField] [TextArea(2, 5)] private string[] interactText;
 
     [Header("InteractIcon")]
     [SerializeField] Sprite icon;
@@ -23,11 +22,11 @@ public class Interactable : MonoBehaviour
             if (useTextBox && !isComplete)
             {
                 GameManager.Instance.interactEnum.SetEnum(interactType);
-                GameManager.Instance.uiManager.Textbox(true, interactText);
+                GameManager.Instance.uiManager.Textbox(true, interactText[0]);
             }
             else if (useTextBox && isComplete)
             {
-                GameManager.Instance.uiManager.Textbox(true, finishedInteractText);
+                GameManager.Instance.uiManager.Textbox(true, interactText[1]);
             }
             else if(!isComplete)
             {
