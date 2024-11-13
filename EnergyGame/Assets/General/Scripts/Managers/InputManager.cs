@@ -31,23 +31,33 @@ public class InputManager : MonoBehaviour
     {
         switch (near)
         {
-            case InteractType.Teleport:
-                print("teleporting...");
-                break;
-
-            case InteractType.Construct:
-                print("constructing..."); 
+            case InteractType.BiomassMinigame:
+                GameManager.Instance.minigameController.BiomassMinigame(true);
+                ResetInteract();
                 break;
 
             case InteractType.BiomassGenerator:
                 GameManager.Instance.biomassGenerator.AddEnergy(GameManager.Instance.playerControl.fuelAmount);
                 GameManager.Instance.playerControl.ResetFuel();
-                //print("adding energy...");
+                ResetInteract();
+                break;
+            
+            case InteractType.HidricMinigame:
+                print("starting hidric minigame...");
                 break;
 
+            case InteractType.HidricGenerator:
+                print("rotating Pipes..."); 
+                break;
+            
             default:
                 break;
         }
+    }
+
+    void ResetInteract()
+    {
+        GameManager.Instance.interactEnum.principalInteractType = InteractType.None;
     }
 
     public void EnableMovement() => inputControls.Player.Movement.Enable();

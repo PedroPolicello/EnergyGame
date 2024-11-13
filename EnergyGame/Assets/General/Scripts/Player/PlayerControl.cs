@@ -1,14 +1,20 @@
+using System;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
     [Header("Player Info")]
-    [SerializeField] private float speed;
+    public float speed;
 
-    [Header("Bag Info")]
+    [Header("Biomass Info")]
     [SerializeField] private int amountForFuel;
     [SerializeField] private int fuelCollected;
     [HideInInspector] public int fuelAmount;
+
+    private void Awake()
+    {
+        transform.position = new Vector3(0, 0.9f, 0);
+    }
 
     void Update()
     {
@@ -18,12 +24,15 @@ public class PlayerControl : MonoBehaviour
     void MovePlayer()
     {
         Vector2 moveDirection = new Vector2(InputManager.Instance.Move.x, InputManager.Instance.Move.y);
-        transform.Translate(moveDirection * speed * Time.deltaTime);
+        transform.Translate(moveDirection * (speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Interactable")) InputManager.Instance.near = GameManager.Instance.interactable.interactType;
+        if (collision.CompareTag("Interactable")) InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
+        //print(GameManager.Instance.interactEnum.principalInteractType);
+
+        #region Biomass Minigame
 
         if (collision.CompareTag("Fuel"))
         {
@@ -37,8 +46,17 @@ public class PlayerControl : MonoBehaviour
             GameManager.Instance.biomassGenerator.RemoveEnergy(amountForFuel);
             Destroy(collision.gameObject);
         }
+        
+        #endregion
     }
-     public void ResetFuel()
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Interactable")) InputManager.Instance.near = InteractType.None;
+    }
+
+
+    public void ResetFuel()
     {
         fuelCollected = 0;
         fuelAmount = 0;

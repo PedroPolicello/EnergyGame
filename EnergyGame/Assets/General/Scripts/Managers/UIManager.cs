@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,9 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI UIText;
     [SerializeField] private Image iconImage;
 
-    [Header("Score Info")]
+    [Header("Biomass Info")]
     [SerializeField] private int score;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private int countdown;
+    [SerializeField] private TextMeshProUGUI countdownText;
 
     public void Textbox(bool isVisible, string text)
     {
@@ -41,6 +44,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void CallCountdown() => StartCoroutine(Countdown());
+    IEnumerator Countdown()
+    {
+        countdownText.gameObject.SetActive(true);
+        for (int i = countdown; i > -1; i--)
+        {
+            countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+        
+        GameManager.Instance.minigameController.StartBiomass();
+        countdownText.gameObject.SetActive(false);
+    }
+
+    #region BiomassUI
+
     public void AddScore(int value)
     {
         score += value;
@@ -53,8 +72,13 @@ public class UIManager : MonoBehaviour
         UpdateUIScore();
     }
 
+
     void UpdateUIScore()
     {
         scoreText.text = $"Score: {score}";
     }
+    
+    
+
+    #endregion
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Managers")]
     public PlayerControl playerControl;
-    public InteractEnum interactable;
+    public InteractEnum interactEnum;
     public UIManager uiManager;
+    public MinigameController minigameController;
 
     [Header("Generators")]
     public BiomassGenerator biomassGenerator;

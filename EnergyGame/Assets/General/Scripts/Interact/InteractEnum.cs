@@ -3,18 +3,19 @@ using UnityEngine.Serialization;
 
 public class InteractEnum : MonoBehaviour
 {
-    [HideInInspector] public InteractType interactType;
+    [HideInInspector] public InteractType principalInteractType;
 
     public void SetEnum(InteractType newType)
     {
-        interactType = newType;
+        principalInteractType = newType;
     }
 }
 
 public enum InteractType
 {
     None,
-    Teleport,
-    Construct,
-    BiomassGenerator
+    BiomassMinigame,
+    HidricMinigame,
+    BiomassGenerator,
+    HidricGenerator
 }

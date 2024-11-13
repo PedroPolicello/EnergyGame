@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ public class BiomassGenerator : MonoBehaviour
     [SerializeField] private Slider energyBar;
     [SerializeField] private float time;
     [SerializeField] private int maxEnergy;
-    [SerializeField] private int currentEnergy;
+    public int currentEnergy;
 
     private void Awake()
     {

@@ -25,10 +25,10 @@ public class Timer : MonoBehaviour
 
         timerText.text = ($"{minutesString}:{secondsString}");
 
-        if (remainingTime <= 0)
+        if (remainingTime <= 0 && GameManager.Instance.biomassGenerator.currentEnergy > 0)
         {
-            Time.timeScale = 0;
             timerText.text = "00:00";
+            GameManager.Instance.minigameController.BiomassMinigame(false);
         }
 
     }
