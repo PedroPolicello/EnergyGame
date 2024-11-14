@@ -19,9 +19,11 @@ public class Interactable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            GameManager.Instance.InputManager.SetEnum(interactType);
+            print(GameManager.Instance.InputManager.principalInteractType);
+
             if (useTextBox && !isComplete)
             {
-                GameManager.Instance.interactEnum.SetEnum(interactType);
                 GameManager.Instance.uiManager.Textbox(true, interactText[0]);
             }
             else if (useTextBox && isComplete)
@@ -30,7 +32,6 @@ public class Interactable : MonoBehaviour
             }
             else if(!isComplete)
             {
-                GameManager.Instance.interactEnum.SetEnum(interactType);
                 GameManager.Instance.uiManager.Icon(true, icon);
             }
             else return;

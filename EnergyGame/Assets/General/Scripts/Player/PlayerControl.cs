@@ -31,8 +31,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.CompareTag("Interactable"))
         {
-            InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
-            //print(GameManager.Instance.interactEnum.principalInteractType);
+            //InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
         }
 
         #region Biomass Minigame

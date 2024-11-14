@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 Move => inputControls.Player.Movement.ReadValue<Vector2>();
 
-    public InteractType near;
+    [HideInInspector] public InteractType principalInteractType;
 
     public InputManager()
     {
@@ -29,11 +29,11 @@ public class InputManager : MonoBehaviour
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)
     {
-        switch (near)
+        switch (principalInteractType)
         {
             case InteractType.BiomassMinigame:
-                GameManager.Instance.minigameController.BiomassMinigame(true);
-                GameManager.Instance.interactEnum.principalInteractType = InteractType.BiomassGenerator;
+                if(!GameManager.Instance.minigameController.biomassFinished) GameManager.Instance.minigameController.BiomassMinigame(true);
+                //print("starting biomass minigame..."); 
                 break;
 
             case InteractType.BiomassGenerator:
@@ -60,16 +60,22 @@ public class InputManager : MonoBehaviour
             
             case InteractType.Sell:
                 GameManager.Instance.vendorManager.SellEnergy();
-                //print("selling energy..."); 
+                print("selling energy..."); 
                 break;
             
             case InteractType.Buy:
                 GameManager.Instance.vendorManager.BuyNextMinigame();
+                print("buying generator..."); 
                 break;
             
             default:
                 break;
         }
+    }
+    
+    public void SetEnum(InteractType newType)
+    {
+        principalInteractType = newType;
     }
 
     public void EnableMovement() => inputControls.Player.Movement.Enable();

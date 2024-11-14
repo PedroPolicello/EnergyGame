@@ -9,7 +9,7 @@ public class BiomassGenerator : MonoBehaviour
     [SerializeField] private int maxEnergy;
     public int currentEnergy;
 
-    private void Awake()
+    private void OnEnable()
     {
         currentEnergy = maxEnergy;
         energyBar.maxValue = currentEnergy;
@@ -26,8 +26,7 @@ public class BiomassGenerator : MonoBehaviour
         if(currentEnergy > maxEnergy) currentEnergy = maxEnergy;
         if (currentEnergy < 0)
         {
-            StopAllCoroutines(); 
-            Time.timeScale = 0;
+            StopAllCoroutines();
         }
     }
 
@@ -37,10 +36,15 @@ public class BiomassGenerator : MonoBehaviour
         {
             currentEnergy--;
             energyBar.value = currentEnergy;
-            if(currentEnergy < 0) Debug.LogError("You Lose");
+            if (currentEnergy < 0)
+            {
+                Debug.LogError("You Lose");
+                GameManager.Instance.minigameController.LoseMinigame(1);
+            }
             yield return new WaitForSeconds(time);
         }
     }
+    
 
     public void AddEnergy(int amount)
     {

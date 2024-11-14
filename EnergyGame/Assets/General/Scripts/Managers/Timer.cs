@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,10 +7,16 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Timer : MonoBehaviour
 {
-
+    public static Timer Instance;
+    
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private float totalTime = 120;
     private float time;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
@@ -31,6 +38,11 @@ public class Timer : MonoBehaviour
             GameManager.Instance.minigameController.BiomassMinigame(false);
         }
 
+    }
+
+    public void ResetTimer()
+    {
+        time = 0;
     }
 
 }

@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject fuelPrefab;
     [SerializeField] private GameObject trashPrefab;
 
-    private void Start()
+    private void OnEnable()
     {
         GenerateFuelSpawnPos();
         GenerateTrashSpawnPos();

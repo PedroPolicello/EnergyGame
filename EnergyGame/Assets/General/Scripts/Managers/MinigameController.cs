@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -8,9 +9,9 @@ using UnityEngine.Serialization;
 public class MinigameController : MonoBehaviour
 {
     [Header("Minigame Objects")]
-    [SerializeField] private GameObject biomassMinigame;
-    [SerializeField] private GameObject hidricMinigame;
-    [SerializeField] private GameObject eolicMinigame;
+    [SerializeField] private GameObject[] biomassMinigame;
+    [SerializeField] private GameObject[] hidricMinigame;
+    [SerializeField] private GameObject[] eolicMinigame;
 
     [Header("Player Pos")]
     [SerializeField] private Vector2 startPos;
@@ -35,6 +36,60 @@ public class MinigameController : MonoBehaviour
     public GameObject hidric;
     public GameObject eolic;
 
+
+    private void Awake()
+    {
+        for (int i = 0; i < biomassMinigame.Length; i++)
+        {
+            biomassMinigame[i].SetActive(false);
+        }
+        for (int i = 0; i < hidricMinigame.Length; i++)
+        {
+            hidricMinigame[i].SetActive(false);
+        }    
+        for (int i = 0; i < eolicMinigame.Length; i++)
+        {
+            eolicMinigame[i].SetActive(false);
+        } 
+    }
+
+    public void LoseMinigame(int index)
+    {
+        if (fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeTo(startPos, 0, 0));
+
+            switch (index)
+            {
+                //Desligar Biomass
+                case 1:
+                    for (int i = 0; i < biomassMinigame.Length; i++)
+                    {
+                        biomassMinigame[i].SetActive(false);
+                    }
+                    Timer.Instance.ResetTimer();
+                    break;
+                
+                //Desligar Hidric
+                case 2:
+                    for (int i = 0; i < hidricMinigame.Length; i++)
+                    {
+                        hidricMinigame[i].SetActive(false);
+                    }                   
+                    break;
+                
+                //Desligar Eolic
+                case 3:
+                    for (int i = 0; i < eolicMinigame.Length; i++)
+                    {
+                        eolicMinigame[i].SetActive(false);
+                    }  
+                    break;
+            }
+        }
+    }
+    
     public void BiomassMinigame(bool isStarting)
     {
         if (isStarting && fadeFinished)
@@ -46,8 +101,10 @@ public class MinigameController : MonoBehaviour
         {
             fadeFinished = false;
             StartCoroutine(FadeTo(startPos, 0, 1));
-            biomassMinigame.SetActive(false);
-        }
+            for (int i = 0; i < biomassMinigame.Length; i++)
+            {
+                biomassMinigame[i].SetActive(false);
+            }        }
         else return;
     }
 
@@ -66,10 +123,12 @@ public class MinigameController : MonoBehaviour
 
         switch (index)
         {
+            //Voltar para Fazenda
             case 0:
                 FarmUpdate(minigameCompleted);
                 break;
             
+            //Ir para Biomass
             case 1:
                 GameManager.Instance.uiManager.CallCountdown();
                 break;
@@ -77,12 +136,20 @@ public class MinigameController : MonoBehaviour
             default:
                 break;
         }
+        
+        fadeFinished = true;
     }
 
     void FarmUpdate(int index)
     {
         switch (index)
         {
+            //Lose Minigame
+            case 0:
+                GameManager.Instance.uiManager.TopUI(true);
+                break;
+            
+            //Biomass Completed
             case 1:
                 biomassFinished = true;
                 GameManager.Instance.uiManager.TopUI(true);
@@ -90,18 +157,26 @@ public class MinigameController : MonoBehaviour
                 biomass.GetComponent<Generator>().enabled = true;
                 break;
             
+            //Hidric Completed
             case 2:
                 hidricFinished = true;
                 GameManager.Instance.uiManager.TopUI(true);
                 hidric.GetComponent<Interactable>().isComplete = true;
-                hidric.GetComponent<Interactable>().enabled = true;
+                hidric.GetComponent<Generator>().enabled = true;
                 break;
             
+            //Eolic Completed
+            case 3:
+                eolicFinished = true;
+                GameManager.Instance.uiManager.TopUI(true);
+                eolic.GetComponent<Interactable>().isComplete = true;
+                eolic.GetComponent<Generator>().enabled = true;
+                break;
+                
             default:
                 break;
         }
         
-        fadeFinished = true;
         GameManager.Instance.InputManager.EnableMovement();
         player.GetComponent<PlayerControl>().speed = 8;
         cam.Follow = player.transform;
@@ -110,9 +185,14 @@ public class MinigameController : MonoBehaviour
 
     public void StartBiomass()
     {
-        fadeFinished = true;
         GameManager.Instance.InputManager.EnableMovement();
-        biomassMinigame.SetActive(true);
+        
+        //Liga GameObjects com scripts
+        for (int i = 0; i < biomassMinigame.Length; i++)
+        {
+            biomassMinigame[i].SetActive(true);
+        }
+        
         player.GetComponent<PlayerControl>().speed = 13;
         cam.Follow = null;
         cam.LookAt = null;

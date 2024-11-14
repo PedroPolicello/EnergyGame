@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Managers")]
     public PlayerControl playerControl;
-    public InteractEnum interactEnum;
     public UIManager uiManager;
     public MinigameController minigameController;
     public VendorManager vendorManager;
