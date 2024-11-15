@@ -36,6 +36,11 @@ public class MinigameController : MonoBehaviour
     public GameObject hidric;
     public GameObject eolic;
 
+    [Header("Tutorial Minigame")] 
+    [TextArea(2,3)] public string biomassTutorial;
+    [TextArea(2,3)] public string hidricTutorial;
+    [TextArea(2,3)] public string eolicTutorial;
+
 
     private void Awake()
     {
@@ -118,7 +123,7 @@ public class MinigameController : MonoBehaviour
         else if (!isStarting && fadeFinished)
         {
             fadeFinished = false;
-            StartCoroutine(FadeTo(startPos, 0, 1));
+            StartCoroutine(FadeTo(startPos, 0, 2));
             for (int i = 0; i < hidricMinigame.Length; i++)
             {
                 hidricMinigame[i].SetActive(false);
@@ -152,6 +157,7 @@ public class MinigameController : MonoBehaviour
                 GameManager.Instance.uiManager.CallCountdown();
                 break;
 
+            //Ir para Hidrc
             case 2:
                 StartHidric();
                 break;
@@ -229,12 +235,9 @@ public class MinigameController : MonoBehaviour
         {
             hidricMinigame[i].SetActive(true);
         }
-        print(cam.Follow);
-        print(cam.LookAt);
+
         cam.Follow = null;
         cam.LookAt = null;
-        print(cam.Follow);
-        print(cam.LookAt);
     }
 
 }

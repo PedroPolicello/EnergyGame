@@ -45,10 +45,11 @@ public class InputManager : MonoBehaviour
             
             case InteractType.HidricMinigame:
                 if (!GameManager.Instance.minigameController.hidricFinished) GameManager.Instance.minigameController.HidricMinigame(true);
-                print("starting hidric minigame...");
+                //print("starting hidric minigame...");
                 break;
 
             case InteractType.HidricPipe:
+                //DO NOTHING
                 break;
             
             case InteractType.EolicMinigame:
@@ -61,12 +62,12 @@ public class InputManager : MonoBehaviour
             
             case InteractType.Sell:
                 GameManager.Instance.vendorManager.SellEnergy();
-                print("selling energy..."); 
+                //print("selling energy..."); 
                 break;
             
             case InteractType.Buy:
                 GameManager.Instance.vendorManager.BuyNextMinigame();
-                print("buying generator..."); 
+                //print("buying generator..."); 
                 break;
             
             default:

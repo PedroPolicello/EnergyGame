@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Pipe : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class Pipe : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool playerColide;
 
+    private bool hasAdd;
 
     private void Awake()
     {
@@ -25,11 +28,17 @@ public class Pipe : MonoBehaviour
         RandomizeRotation();
     }
 
+    private void Start()
+    {
+        //CheckRotation();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerColide)
         {
             RotatePipe();
+            GameManager.Instance.hidricGenerator.CheckAllPipes();
         }
     }
 
@@ -49,12 +58,25 @@ public class Pipe : MonoBehaviour
     {
         for (int i = 0; i < correctRotation.Length; i++)
         {
-            if (transform.eulerAngles.z == correctRotation[i])
+            if (Math.Abs(transform.eulerAngles.z - correctRotation[i]) < .5f)
             {
                 isComplete = true;
+                if (!hasAdd)
+                {
+                    GameManager.Instance.hidricGenerator.correctPipesCount++;
+                    hasAdd = true;
+                }
                 return;
             }
-            else isComplete = false;
+            else
+            {
+                isComplete = false;
+                if (hasAdd)
+                {
+                    GameManager.Instance.hidricGenerator.correctPipesCount--;
+                    hasAdd = false;
+                }
+            }
         }
     }
 

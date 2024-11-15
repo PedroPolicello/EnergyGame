@@ -65,6 +65,7 @@ public class VendorManager : MonoBehaviour
             
             default:
                 Debug.LogError("Not enough money");
+                generatorIndex--;
                 break;
         }
     }
