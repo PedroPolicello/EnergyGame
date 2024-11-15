@@ -8,7 +8,7 @@ public enum InteractType
     HidricMinigame,
     EolicMinigame,
     BiomassGenerator,
-    HidricGenerator,
+    HidricPipe,
     EolicGenerator,
     Sell,
     Buy

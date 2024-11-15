@@ -20,7 +20,7 @@ public class Interactable : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameManager.Instance.InputManager.SetEnum(interactType);
-            print(GameManager.Instance.InputManager.principalInteractType);
+            //print(GameManager.Instance.InputManager.principalInteractType);
 
             if (useTextBox && !isComplete)
             {

@@ -108,6 +108,25 @@ public class MinigameController : MonoBehaviour
         else return;
     }
 
+    public void HidricMinigame(bool isStarting)
+    {
+        if (isStarting && fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeTo(hidricPos, 2, 0));
+        }
+        else if (!isStarting && fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeTo(startPos, 0, 1));
+            for (int i = 0; i < hidricMinigame.Length; i++)
+            {
+                hidricMinigame[i].SetActive(false);
+            }
+        }
+        else return;
+    }
+
     IEnumerator FadeTo(Vector2 position, int index, int minigameCompleted)
     {
         GameManager.Instance.InputManager.DisableMovement();
@@ -131,6 +150,10 @@ public class MinigameController : MonoBehaviour
             //Ir para Biomass
             case 1:
                 GameManager.Instance.uiManager.CallCountdown();
+                break;
+
+            case 2:
+                StartHidric();
                 break;
             
             default:
@@ -197,5 +220,21 @@ public class MinigameController : MonoBehaviour
         cam.Follow = null;
         cam.LookAt = null;
     }
-    
+
+    void StartHidric()
+    {
+        GameManager.Instance.InputManager.EnableMovement();
+
+        for (int i = 0; i < hidricMinigame.Length; i++)
+        {
+            hidricMinigame[i].SetActive(true);
+        }
+        print(cam.Follow);
+        print(cam.LookAt);
+        cam.Follow = null;
+        cam.LookAt = null;
+        print(cam.Follow);
+        print(cam.LookAt);
+    }
+
 }

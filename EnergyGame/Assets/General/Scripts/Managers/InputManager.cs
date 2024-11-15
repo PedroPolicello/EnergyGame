@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public Vector2 Move => inputControls.Player.Movement.ReadValue<Vector2>();
 
     [HideInInspector] public InteractType principalInteractType;
+    [HideInInspector] public bool inPipe;
 
     public InputManager()
     {
@@ -43,11 +44,11 @@ public class InputManager : MonoBehaviour
                 break;
             
             case InteractType.HidricMinigame:
+                if (!GameManager.Instance.minigameController.hidricFinished) GameManager.Instance.minigameController.HidricMinigame(true);
                 print("starting hidric minigame...");
                 break;
 
-            case InteractType.HidricGenerator:
-                print("rotating pipes..."); 
+            case InteractType.HidricPipe:
                 break;
             
             case InteractType.EolicMinigame:
@@ -72,6 +73,8 @@ public class InputManager : MonoBehaviour
                 break;
         }
     }
+
+
     
     public void SetEnum(InteractType newType)
     {

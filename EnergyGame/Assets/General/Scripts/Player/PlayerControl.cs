@@ -29,11 +29,6 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Interactable"))
-        {
-            //InputManager.Instance.near = GameManager.Instance.interactEnum.principalInteractType;
-        }
-
         #region Biomass Minigame
 
         if (collision.CompareTag("Fuel"))

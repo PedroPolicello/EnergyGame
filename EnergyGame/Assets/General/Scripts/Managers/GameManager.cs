@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public MinigameController minigameController;
     public VendorManager vendorManager;
 
-    [Header("Generators")]
+    [Header("Biomass Generators")]
     public BiomassGenerator biomassGenerator;
 
     void Awake()
