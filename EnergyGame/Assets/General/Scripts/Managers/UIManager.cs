@@ -94,8 +94,8 @@ public class UIManager : MonoBehaviour
     #endregion
     #region Countdown
 
-    public void CallCountdown() => StartCoroutine(Countdown());
-    IEnumerator Countdown()
+    public void CallCountdown(int index) => StartCoroutine(Countdown(index));
+    IEnumerator Countdown(int index)
     {
         countdownText.gameObject.SetActive(true);
         for (int i = countdown; i > -1; i--)
@@ -103,8 +103,17 @@ public class UIManager : MonoBehaviour
             countdownText.text = i.ToString();
             yield return new WaitForSeconds(1);
         }
-        
-        GameManager.Instance.minigameController.StartBiomass();
+
+        switch (index)
+        {
+            case 1:
+                GameManager.Instance.minigameController.StartBiomass();
+                break;
+            
+            case 2:
+                GameManager.Instance.minigameController.StartEolic();
+                break;
+        }
         countdownText.gameObject.SetActive(false);
     }
 

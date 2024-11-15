@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Generators")]
     public BiomassGenerator biomassGenerator;
     public HidricGenerator hidricGenerator;
+    public EolicGenerator eolicGenerator;
 
     void Awake()
     {

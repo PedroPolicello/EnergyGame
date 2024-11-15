@@ -53,11 +53,12 @@ public class InputManager : MonoBehaviour
                 break;
             
             case InteractType.EolicMinigame:
-                print("starting eolic minigame..."); 
+                if (!GameManager.Instance.minigameController.hidricFinished) GameManager.Instance.minigameController.EolicMinigame(true);
+                //print("starting eolic minigame..."); 
                 break;
             
-            case InteractType.EolicGenerator:
-                print("rotating generator..."); 
+            case InteractType.EolicMill:
+                //DO NOTHING
                 break;
             
             case InteractType.Sell:
@@ -73,8 +74,8 @@ public class InputManager : MonoBehaviour
             default:
                 break;
         }
-    }
 
+    }
 
     
     public void SetEnum(InteractType newType)

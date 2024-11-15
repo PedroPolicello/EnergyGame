@@ -112,7 +112,6 @@ public class MinigameController : MonoBehaviour
             }        }
         else return;
     }
-
     public void HidricMinigame(bool isStarting)
     {
         if (isStarting && fadeFinished)
@@ -131,6 +130,25 @@ public class MinigameController : MonoBehaviour
         }
         else return;
     }
+    public void EolicMinigame(bool isStarting)
+    {
+        if (isStarting && fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeTo(eolicPos, 3, 0));
+        }
+        else if (!isStarting && fadeFinished)
+        {
+            fadeFinished = false;
+            StartCoroutine(FadeTo(startPos, 0, 3));
+            for (int i = 0; i < eolicMinigame.Length; i++)
+            {
+                eolicMinigame[i].SetActive(false);
+            }
+        }
+        else return;
+    }
+    
 
     IEnumerator FadeTo(Vector2 position, int index, int minigameCompleted)
     {
@@ -154,12 +172,17 @@ public class MinigameController : MonoBehaviour
             
             //Ir para Biomass
             case 1:
-                GameManager.Instance.uiManager.CallCountdown();
+                GameManager.Instance.uiManager.CallCountdown(1);
                 break;
 
             //Ir para Hidrc
             case 2:
                 StartHidric();
+                break;
+            
+            //Ir para Eolic
+            case 3:
+                GameManager.Instance.uiManager.CallCountdown(2);
                 break;
             
             default:
@@ -234,6 +257,19 @@ public class MinigameController : MonoBehaviour
         for (int i = 0; i < hidricMinigame.Length; i++)
         {
             hidricMinigame[i].SetActive(true);
+        }
+
+        cam.Follow = null;
+        cam.LookAt = null;
+    }
+
+    public void StartEolic()
+    {
+        GameManager.Instance.InputManager.EnableMovement();
+
+        for (int i = 0; i < eolicMinigame.Length; i++)
+        {
+            eolicMinigame[i].SetActive(true);
         }
 
         cam.Follow = null;

@@ -9,7 +9,7 @@ public enum InteractType
     EolicMinigame,
     BiomassGenerator,
     HidricPipe,
-    EolicGenerator,
+    EolicMill,
     Sell,
     Buy
 }

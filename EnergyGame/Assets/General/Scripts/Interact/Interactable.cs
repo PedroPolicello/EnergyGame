@@ -42,6 +42,8 @@ public class Interactable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            GameManager.Instance.InputManager.SetEnum(InteractType.None);
+
             if (useTextBox) GameManager.Instance.uiManager.Textbox(false, "");
             else GameManager.Instance.uiManager.Icon(false, null);
         }
