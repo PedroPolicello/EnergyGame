@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Mill : MonoBehaviour
 {
-    
+    [SerializeField] private int millNumber;
     private Animator animator;
     private bool playerColide;
 
@@ -26,8 +26,8 @@ public class Mill : MonoBehaviour
 
     public void PlayAnim()
     {
-        animator.SetTrigger("Rotate"); 
-        //Add to Sequence
+        animator.SetTrigger("Rotate");
+        GameManager.Instance.eolicGenerator.AddPlayerInput(millNumber);
     }
     
     private void OnTriggerEnter2D(Collider2D collision)
