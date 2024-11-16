@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,10 +25,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int score;
     [SerializeField] private TextMeshProUGUI scoreText;
 
+    [Header("Tutorial Info")] 
+    [SerializeField] private GameObject tutorialBox;
+    [SerializeField] private TextMeshProUGUI tutorialText;
+    [SerializeField] private float duration;
+    
     private void Awake()
     {
         moneyText.text = $"Money: {money}";
         energyText.text = $"Energy: {energy}";
+        tutorialBox.GetComponent<CanvasGroup>().alpha = 0;
     }
 
     public void Textbox(bool isVisible, string text)
@@ -62,6 +69,40 @@ public class UIManager : MonoBehaviour
     {
         if(isVisible) topUI.SetActive(true);
         else topUI.SetActive(false);
+    }
+
+    public void CallTutorial(int index, string tutorial)
+    {
+        StartCoroutine(ShowTutorial(index, tutorial));
+    }
+    
+    IEnumerator ShowTutorial(int index, string text)
+    {
+        tutorialText.text = text;
+        tutorialBox.GetComponent<CanvasGroup>().DOFade(1, 1);
+        yield return new WaitForSeconds(duration);
+        tutorialBox.GetComponent<CanvasGroup>().DOFade(0, 1);
+
+        switch (index)
+        {
+            //Biomass
+            case 1:
+                CallCountdown(1);
+                break;
+            
+            //Hidric
+            case 2:
+                GameManager.Instance.minigameController.StartHidric();
+                break;
+            
+            //Eolic
+            case 3:
+                CallCountdown(2);
+                break;
+            
+            default:
+                break;
+        }
     }
 
     #region Money

@@ -172,17 +172,17 @@ public class MinigameController : MonoBehaviour
             
             //Ir para Biomass
             case 1:
-                GameManager.Instance.uiManager.CallCountdown(1);
+                GameManager.Instance.uiManager.CallTutorial(1, biomassTutorial);
                 break;
 
             //Ir para Hidrc
             case 2:
-                StartHidric();
+                GameManager.Instance.uiManager.CallTutorial(2, hidricTutorial);
                 break;
             
             //Ir para Eolic
             case 3:
-                GameManager.Instance.uiManager.CallCountdown(2);
+                GameManager.Instance.uiManager.CallTutorial(3, eolicTutorial);
                 break;
             
             default:
@@ -190,6 +190,47 @@ public class MinigameController : MonoBehaviour
         }
         
         fadeFinished = true;
+    }
+
+    public void StartBiomass()
+    {
+        GameManager.Instance.InputManager.EnableMovement();
+        
+        //Liga GameObjects com scripts
+        for (int i = 0; i < biomassMinigame.Length; i++)
+        {
+            biomassMinigame[i].SetActive(true);
+        }
+        
+        player.GetComponent<PlayerControl>().speed = 13;
+        cam.Follow = null;
+        cam.LookAt = null;
+    }
+
+    public void StartHidric()
+    {
+        GameManager.Instance.InputManager.EnableMovement();
+
+        for (int i = 0; i < hidricMinigame.Length; i++)
+        {
+            hidricMinigame[i].SetActive(true);
+        }
+
+        cam.Follow = null;
+        cam.LookAt = null;
+    }
+
+    public void StartEolic()
+    {
+        GameManager.Instance.InputManager.EnableMovement();
+
+        for (int i = 0; i < eolicMinigame.Length; i++)
+        {
+            eolicMinigame[i].SetActive(true);
+        }
+
+        cam.Follow = null;
+        cam.LookAt = null;
     }
 
     void FarmUpdate(int index)
@@ -233,47 +274,14 @@ public class MinigameController : MonoBehaviour
         player.GetComponent<PlayerControl>().speed = 8;
         cam.Follow = player.transform;
         cam.LookAt = player.transform;
+        if(biomassFinished && hidricFinished && eolicFinished) StartCoroutine(EndScreen());
     }
 
-    public void StartBiomass()
+    IEnumerator EndScreen()
     {
-        GameManager.Instance.InputManager.EnableMovement();
-        
-        //Liga GameObjects com scripts
-        for (int i = 0; i < biomassMinigame.Length; i++)
-        {
-            biomassMinigame[i].SetActive(true);
-        }
-        
-        player.GetComponent<PlayerControl>().speed = 13;
-        cam.Follow = null;
-        cam.LookAt = null;
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.InputManager.DisableMovement();
+        GameManager.Instance.uiManager.CallTutorial(0,"Obrigado por Jogar!");
+        Time.timeScale = 0;
     }
-
-    void StartHidric()
-    {
-        GameManager.Instance.InputManager.EnableMovement();
-
-        for (int i = 0; i < hidricMinigame.Length; i++)
-        {
-            hidricMinigame[i].SetActive(true);
-        }
-
-        cam.Follow = null;
-        cam.LookAt = null;
-    }
-
-    public void StartEolic()
-    {
-        GameManager.Instance.InputManager.EnableMovement();
-
-        for (int i = 0; i < eolicMinigame.Length; i++)
-        {
-            eolicMinigame[i].SetActive(true);
-        }
-
-        cam.Follow = null;
-        cam.LookAt = null;
-    }
-
 }

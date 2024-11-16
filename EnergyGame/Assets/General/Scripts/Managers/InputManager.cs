@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
                 break;
             
             case InteractType.EolicMinigame:
-                if (!GameManager.Instance.minigameController.hidricFinished) GameManager.Instance.minigameController.EolicMinigame(true);
+                if (!GameManager.Instance.minigameController.eolicFinished) GameManager.Instance.minigameController.EolicMinigame(true);
                 //print("starting eolic minigame..."); 
                 break;
             
