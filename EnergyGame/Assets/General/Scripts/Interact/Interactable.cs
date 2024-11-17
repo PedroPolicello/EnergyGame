@@ -20,7 +20,6 @@ public class Interactable : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameManager.Instance.InputManager.SetEnum(interactType);
-            //print(GameManager.Instance.InputManager.principalInteractType);
 
             if (useTextBox && !isComplete)
             {
@@ -35,6 +34,11 @@ public class Interactable : MonoBehaviour
                 GameManager.Instance.uiManager.Icon(true, icon);
             }
             else return;
+
+            if (interactType == InteractType.Buy)
+            {
+                GameManager.Instance.uiManager.GeneratorsToBuy(true);
+            }
         }
     }
 
@@ -46,6 +50,11 @@ public class Interactable : MonoBehaviour
 
             if (useTextBox) GameManager.Instance.uiManager.Textbox(false, "");
             else GameManager.Instance.uiManager.Icon(false, null);
+            
+            if (interactType == InteractType.Buy)
+            {
+                GameManager.Instance.uiManager.GeneratorsToBuy(false);
+            }
         }
     }
 }
