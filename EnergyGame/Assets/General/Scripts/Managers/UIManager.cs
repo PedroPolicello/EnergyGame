@@ -7,10 +7,14 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Gameplay Info")]
+    [Header("Text Info")]
     [SerializeField] private GameObject textbox;
     [SerializeField] private TextMeshProUGUI UIText;
+    [SerializeField] private GameObject feedbackBox;
+    [SerializeField] private TextMeshProUGUI feedbackText;
     [SerializeField] private Image iconImage;
+
+    [Header("CountDown Info")] 
     [SerializeField] private int countdown;
     [SerializeField] private TextMeshProUGUI countdownText;
 
@@ -21,19 +25,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI energyText;
     [SerializeField] private TextMeshProUGUI moneyText;
 
-    [Header("Biomass Info")]
+    [Header("Generators Info")]
+    [SerializeField] private GameObject generatorsList;
+    public TextMeshProUGUI hidricText;
+    public TextMeshProUGUI eolicText;
+    
+    [Header("Biomass Minigame Info")]
     [SerializeField] private int score;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Header("Tutorial Info")] 
     [SerializeField] private GameObject tutorialBox;
     [SerializeField] private TextMeshProUGUI tutorialText;
-    [SerializeField] private float duration;
     
     private void Awake()
     {
         moneyText.text = $"Money: {money}";
         energyText.text = $"Energy: {energy}";
+        tutorialBox.SetActive(true);
         tutorialBox.GetComponent<CanvasGroup>().alpha = 0;
     }
 
@@ -48,6 +57,20 @@ public class UIManager : MonoBehaviour
         {
             textbox.SetActive(false);
             UIText.text = text;
+        }
+    }
+    
+    public void Feedbackbox(bool isVisible, string text)
+    {
+        if (isVisible)
+        {
+            feedbackBox.SetActive(true);
+            feedbackText.text = text;
+        }
+        else
+        {
+            feedbackBox.SetActive(false);
+            feedbackText.text = text;
         }
     }
     
@@ -70,18 +93,30 @@ public class UIManager : MonoBehaviour
         if(isVisible) topUI.SetActive(true);
         else topUI.SetActive(false);
     }
-
-    public void CallTutorial(int index, string tutorial)
+    
+    public void GeneratorsToBuy(bool isVisible)
     {
-        StartCoroutine(ShowTutorial(index, tutorial));
+        if (isVisible)
+        {
+            hidricText.text = $"Hídrico: {GameManager.Instance.vendorManager.hidricPrice.ToString()}";
+            eolicText.text = $"Éolico: {GameManager.Instance.vendorManager.eolicPrice.ToString()}";
+            generatorsList.SetActive(true);
+        }
+        else {generatorsList.SetActive(false);}
+    }
+
+    public void CallTutorial(int index, string tutorial, float duration)
+    {
+        StartCoroutine(ShowTutorial(index, tutorial, duration));
     }
     
-    IEnumerator ShowTutorial(int index, string text)
+    IEnumerator ShowTutorial(int index, string text, float duration)
     {
         tutorialText.text = text;
         tutorialBox.GetComponent<CanvasGroup>().DOFade(1, 1);
         yield return new WaitForSeconds(duration);
         tutorialBox.GetComponent<CanvasGroup>().DOFade(0, 1);
+        yield return new WaitForSeconds(1);
 
         switch (index)
         {
@@ -98,6 +133,12 @@ public class UIManager : MonoBehaviour
             //Eolic
             case 3:
                 CallCountdown(2);
+                break;
+            
+            //Start Game
+            case 4:
+                GameManager.Instance.InputManager.EnableMovement();
+                GameManager.Instance.uiManager.TopUI(true);
                 break;
             
             default:
