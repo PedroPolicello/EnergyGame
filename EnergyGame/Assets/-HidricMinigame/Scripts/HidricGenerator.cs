@@ -8,7 +8,6 @@ public class HidricGenerator : MonoBehaviour
     [SerializeField] private GameObject[] corretPipes;
     [SerializeField] private bool[] isComplete;
     public int correctPipesCount;
-    
 
     public void CheckAllPipes()
     {

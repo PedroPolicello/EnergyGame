@@ -85,4 +85,7 @@ public class InputManager : MonoBehaviour
 
     public void EnableMovement() => inputControls.Player.Movement.Enable();
     public void DisableMovement() => inputControls.Player.Movement.Disable();
+    
+    public void EnableInteract() => inputControls.Player.Interact.Enable();
+    public void DisableInteract() => inputControls.Player.Interact.Disable();
 }

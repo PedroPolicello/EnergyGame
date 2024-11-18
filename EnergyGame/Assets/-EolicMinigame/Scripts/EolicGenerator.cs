@@ -17,6 +17,7 @@ public class EolicGenerator : MonoBehaviour
     private int millSelected;
     private int index = 1;
     private int checkIndex;
+    
     private void OnEnable()
     {
         ResetMinigame();
@@ -26,25 +27,6 @@ public class EolicGenerator : MonoBehaviour
     {
         StartCoroutine(PlayMill(millsPerSequence[0]));
     }
-
-    void Interaction(bool enable)
-    {
-        if (enable)
-        {
-            for (int i = 0; i < millsToInteract.Length; i++)
-            {
-                millsToInteract[i].GetComponent<PolygonCollider2D>().isTrigger = true;
-            }
-        }
-        else
-        {
-            for (int i = 0; i < millsToInteract.Length; i++)
-            {
-                millsToInteract[i].GetComponent<PolygonCollider2D>().isTrigger = false;
-            }
-        }
-    }
-    
 
     IEnumerator PlayMill(int millsInSequence)
     {
@@ -59,7 +41,7 @@ public class EolicGenerator : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1);
-        Interaction(true);
+        GameManager.Instance.InputManager.EnableInteract();
     }
 
     public void AddPlayerInput(int millPlayed)
@@ -78,7 +60,7 @@ public class EolicGenerator : MonoBehaviour
                 print("Acertou");
                 //Play Sound
                 NewSequence();
-                Interaction(false);
+                GameManager.Instance.InputManager.DisableInteract();
             }
         }
         else

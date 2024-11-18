@@ -30,7 +30,8 @@ public class Pipe : MonoBehaviour
 
     private void Start()
     {
-        //CheckRotation();
+        CheckRotation();
+        GameManager.Instance.hidricGenerator.CheckAllPipes();
     }
 
     private void Update()
@@ -40,6 +41,7 @@ public class Pipe : MonoBehaviour
             RotatePipe();
             GameManager.Instance.hidricGenerator.CheckAllPipes();
         }
+
     }
 
     void RandomizeRotation()
@@ -66,6 +68,7 @@ public class Pipe : MonoBehaviour
                     GameManager.Instance.hidricGenerator.correctPipesCount++;
                     hasAdd = true;
                 }
+
                 return;
             }
             else

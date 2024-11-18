@@ -227,6 +227,8 @@ public class MinigameController : MonoBehaviour
 
     public void StartHidric()
     {
+        
+        GameManager.Instance.hidricGenerator.CheckAllPipes();
         GameManager.Instance.InputManager.EnableMovement();
 
         for (int i = 0; i < hidricMinigame.Length; i++)
