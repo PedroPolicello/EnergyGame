@@ -48,6 +48,7 @@ public class EolicGenerator : MonoBehaviour
     {
         playerInput.Add(millPlayed);
         CheckPlayerInput();
+        GameManager.Instance.InputManager.DisableInteract();
     }
 
     void CheckPlayerInput()
@@ -60,7 +61,6 @@ public class EolicGenerator : MonoBehaviour
                 print("Acertou");
                 //Play Sound
                 NewSequence();
-                GameManager.Instance.InputManager.DisableInteract();
             }
         }
         else
