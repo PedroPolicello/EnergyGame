@@ -53,6 +53,7 @@ public class Pipe : MonoBehaviour
     public void RotatePipe()
     {
         transform.Rotate(0, 0, 90);
+        GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.rotatePipes);
         CheckRotation();
     }
 

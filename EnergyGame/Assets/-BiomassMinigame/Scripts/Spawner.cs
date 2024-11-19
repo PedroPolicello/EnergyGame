@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     private Vector2 spawnPos;
 
     [Header("Prefabs")]
-    [SerializeField] private GameObject fuelPrefab;
+    [SerializeField] private GameObject[] fuelPrefab;
     [SerializeField] private GameObject trashPrefab;
 
     private void OnEnable()
@@ -35,7 +35,8 @@ public class Spawner : MonoBehaviour
     IEnumerator SpawnFuel()
     {
         yield return new WaitForSeconds(fuelSpawnTime);
-        Instantiate(fuelPrefab, spawnPos, Quaternion.identity);
+        int selectedPrefab = Random.Range(0, fuelPrefab.Length);
+        Instantiate(fuelPrefab[selectedPrefab], spawnPos, Quaternion.identity);
         GenerateFuelSpawnPos();
     }
 

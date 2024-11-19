@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public MinigameController minigameController;
     public VendorManager vendorManager;
+    public SoundManager soundManager;
 
     [Header("Generators")]
     public BiomassGenerator biomassGenerator;

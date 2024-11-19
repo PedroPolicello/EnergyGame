@@ -34,17 +34,20 @@ public class InputManager : MonoBehaviour
         {
             case InteractType.BiomassMinigame:
                 if(!GameManager.Instance.minigameController.biomassFinished) GameManager.Instance.minigameController.BiomassMinigame(true);
+                GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                 //print("starting biomass minigame..."); 
                 break;
 
             case InteractType.BiomassGenerator:
                 GameManager.Instance.biomassGenerator.AddEnergy(GameManager.Instance.playerControl.fuelAmount);
                 GameManager.Instance.playerControl.ResetFuel();
+                GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                 //print("adding fuel...");
                 break;
             
             case InteractType.HidricMinigame:
                 if (!GameManager.Instance.minigameController.hidricFinished) GameManager.Instance.minigameController.HidricMinigame(true);
+                GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                 //print("starting hidric minigame...");
                 break;
 
@@ -54,6 +57,7 @@ public class InputManager : MonoBehaviour
             
             case InteractType.EolicMinigame:
                 if (!GameManager.Instance.minigameController.eolicFinished) GameManager.Instance.minigameController.EolicMinigame(true);
+                GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                 //print("starting eolic minigame..."); 
                 break;
             

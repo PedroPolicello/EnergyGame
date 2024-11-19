@@ -65,6 +65,7 @@ public class MinigameController : MonoBehaviour
         }
 
         fade.alpha = 1;
+        GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundGame);
         StartCoroutine(FadeTo(startPos, 4, 0));
     }
 
@@ -181,6 +182,8 @@ public class MinigameController : MonoBehaviour
             //Voltar para Fazenda
             case 0:
                 FarmUpdate(minigameCompleted);
+                GameManager.Instance.soundManager.PlayBGCLip(false, GameManager.Instance.soundManager.backgroundMinigame);
+                GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundGame);
                 break;
             
             //Ir para Biomass

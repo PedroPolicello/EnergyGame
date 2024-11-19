@@ -25,12 +25,14 @@ public class VendorManager : MonoBehaviour
         if (GameManager.Instance.uiManager.energy <= 0)
         {
             //Sem Energia
+            GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
             StartCoroutine(Feedback(feedbackText[0]));
         }
         else
         {
             GameManager.Instance.uiManager.AddMoney(GameManager.Instance.uiManager.energy * moneyPerEnergy);
             GameManager.Instance.uiManager.RemoveEnergy(GameManager.Instance.uiManager.energy);
+            //GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.sellEnergy);
         }
     }
 
@@ -44,6 +46,7 @@ public class VendorManager : MonoBehaviour
                 {
                     //Sem Dinheiro
                     generatorIndex--;
+                    GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                     StartCoroutine(Feedback(feedbackText[1]));
                     return;
                 }
@@ -52,6 +55,7 @@ public class VendorManager : MonoBehaviour
                     GameManager.Instance.uiManager.hidricText.gameObject.SetActive(false);
                     GameManager.Instance.uiManager.RemoveMoney(hidricPrice);
                     GameManager.Instance.minigameController.hidric.SetActive(true);
+                    GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.buy);
                 }
                 break;
             
@@ -60,6 +64,7 @@ public class VendorManager : MonoBehaviour
                 {
                     //Sem Dinheiro
                     generatorIndex--;
+                    GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                     StartCoroutine(Feedback(feedbackText[1]));
                     return;
                 }
@@ -68,12 +73,14 @@ public class VendorManager : MonoBehaviour
                     GameManager.Instance.uiManager.eolicText.gameObject.SetActive(false);
                     GameManager.Instance.uiManager.RemoveMoney(eolicPrice);
                     GameManager.Instance.minigameController.eolic.SetActive(true);
+                    GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.buy);
                 }
                 break;
             
             default:
                 //Sem Dinheiro
                 generatorIndex--;
+                GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.interaction);
                 StartCoroutine(Feedback(feedbackText[1]));
                 break;
         }

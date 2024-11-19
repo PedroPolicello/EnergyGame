@@ -123,16 +123,22 @@ public class UIManager : MonoBehaviour
             //Biomass
             case 1:
                 CallCountdown(1);
+                GameManager.Instance.soundManager.PlayBGCLip(false, GameManager.Instance.soundManager.backgroundGame);
+                GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundMinigame);
                 break;
             
             //Hidric
             case 2:
                 GameManager.Instance.minigameController.StartHidric();
+                GameManager.Instance.soundManager.PlayBGCLip(false, GameManager.Instance.soundManager.backgroundGame);
+                GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundMinigame);
                 break;
             
             //Eolic
             case 3:
                 CallCountdown(2);
+                GameManager.Instance.soundManager.PlayBGCLip(false, GameManager.Instance.soundManager.backgroundGame);
+                GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundMinigame);
                 break;
             
             //Start Game

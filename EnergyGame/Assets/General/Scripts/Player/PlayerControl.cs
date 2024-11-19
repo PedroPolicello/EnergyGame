@@ -6,6 +6,10 @@ public class PlayerControl : MonoBehaviour
     [Header("Player Info")]
     public float speed;
 
+    [Header("Sound Info")] 
+    [SerializeField] private AudioClip trash;
+    private AudioSource audioSource;
+
     [Header("Biomass Info")]
     [SerializeField] private int amountForFuel;
     [SerializeField] private int fuelCollected;
@@ -14,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         transform.position = new Vector3(0, 0.9f, 0);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -41,6 +46,7 @@ public class PlayerControl : MonoBehaviour
         if(collision.CompareTag("Trash"))
         {
             GameManager.Instance.biomassGenerator.RemoveEnergy(amountForFuel);
+            audioSource.PlayOneShot(trash);
             Destroy(collision.gameObject);
         }
         

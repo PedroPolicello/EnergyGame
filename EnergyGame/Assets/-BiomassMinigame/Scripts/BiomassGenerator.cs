@@ -1,19 +1,32 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BiomassGenerator : MonoBehaviour
 {
+    [Header("Biomass Info")]
     [SerializeField] private Slider energyBar;
     [SerializeField] private float time;
     [SerializeField] private int maxEnergy;
     public int currentEnergy;
+
+    [Header("Sound Info")]
+    [SerializeField] private float volume;
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = volume;
+    }
 
     private void OnEnable()
     {
         currentEnergy = maxEnergy;
         energyBar.maxValue = currentEnergy;
         energyBar.value = currentEnergy;
+        PlaySound();
     }
 
     private void Start()
@@ -56,5 +69,11 @@ public class BiomassGenerator : MonoBehaviour
     {
         currentEnergy -= amount;
         GameManager.Instance.uiManager.RemoveScore(amount);
+    }
+
+    void PlaySound()
+    {
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }
