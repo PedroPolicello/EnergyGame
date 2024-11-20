@@ -32,7 +32,7 @@ public class VendorManager : MonoBehaviour
         {
             GameManager.Instance.uiManager.AddMoney(GameManager.Instance.uiManager.energy * moneyPerEnergy);
             GameManager.Instance.uiManager.RemoveEnergy(GameManager.Instance.uiManager.energy);
-            //GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.sellEnergy);
+            GameManager.Instance.soundManager.PlaySFXClip(GameManager.Instance.soundManager.sell);
         }
     }
 

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [SerializeField] private bool isMenu;
     [SerializeField] private AudioSource audioSourceSFX;
     [SerializeField] private AudioSource audioSourceBG;
-
 
     [Header("Volume")]
     [SerializeField] private float musicVolume;
@@ -16,16 +16,26 @@ public class SoundManager : MonoBehaviour
     [Header("SFX Clips")]
     public AudioClip interaction;
     public AudioClip buy;
+    public AudioClip sell;
     public AudioClip rotatePipes;
     
     [Header("BG Clips")] 
+    public AudioClip backgroundMenu;
     public AudioClip backgroundGame;
     public AudioClip backgroundMinigame;
 
     private void Awake()
     {
-        audioSourceBG.volume = musicVolume;
-        audioSourceSFX.volume = sfxVolume;
+        if (audioSourceBG != null) audioSourceBG.volume = musicVolume;
+        if (audioSourceSFX != null) audioSourceSFX.volume = sfxVolume;
+    }
+
+    private void Start()
+    {
+        if(isMenu) 
+            PlayBGCLip(true, backgroundMenu);
+        else 
+            PlayBGCLip(true, backgroundGame);
     }
 
     public void PlaySFXClip(AudioClip clip)

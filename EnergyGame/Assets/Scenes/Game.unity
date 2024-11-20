@@ -18361,7 +18361,8 @@ MonoBehaviour:
   musicVolume: 0.07
   sfxVolume: 0.8
   interaction: {fileID: 8300000, guid: d72a64af34f51024daea70db6c4c5d13, type: 3}
-  buy: {fileID: 8300000, guid: 025f4299e9a05d2488ebad5a9f4646b3, type: 3}
+  buy: {fileID: 8300000, guid: 46f596faff880c0468819e79304e7c74, type: 3}
+  sell: {fileID: 8300000, guid: afa5ecafcfc8ef343ab3fb54c5a48a9d, type: 3}
   rotatePipes: {fileID: 8300000, guid: f39313a0f2942524b9443f3a309f0c50, type: 3}
   backgroundGame: {fileID: 8300000, guid: 414a78df348c6f24795c76174587b3b6, type: 3}
   backgroundMinigame: {fileID: 8300000, guid: 9aab03ac49a1447469855e86be8ca8f7, type: 3}
@@ -35166,6 +35167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   trash: {fileID: 8300000, guid: 17a0d666e9326fc40aac73efe762586d, type: 3}
+  bio: {fileID: 8300000, guid: 828324b1255ae7a4185a41cce8428319, type: 3}
   amountForFuel: 5
   fuelCollected: 0
   fuelAmount: 0

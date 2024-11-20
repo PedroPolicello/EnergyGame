@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
 
     [Header("Sound Info")] 
     [SerializeField] private AudioClip trash;
+    [SerializeField] private AudioClip bio;
     private AudioSource audioSource;
 
     [Header("Biomass Info")]
@@ -38,6 +39,7 @@ public class PlayerControl : MonoBehaviour
 
         if (collision.CompareTag("Fuel"))
         {
+            audioSource.PlayOneShot(bio);
             fuelCollected++;
             fuelAmount = amountForFuel * fuelCollected;
             Destroy(collision.gameObject);

@@ -65,7 +65,6 @@ public class MinigameController : MonoBehaviour
         }
 
         fade.alpha = 1;
-        GameManager.Instance.soundManager.PlayBGCLip(true, GameManager.Instance.soundManager.backgroundGame);
         StartCoroutine(FadeTo(startPos, 4, 0));
     }
 
