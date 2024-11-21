@@ -6,6 +6,8 @@ public class PlayerControl : MonoBehaviour
     [Header("Player Info")]
     public float speed;
 
+    private SpriteRenderer spriteRenderer;
+    
     [Header("Sound Info")] 
     [SerializeField] private AudioClip trash;
     [SerializeField] private AudioClip bio;
@@ -20,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     {
         transform.position = new Vector3(0, 0.9f, 0);
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -31,6 +34,11 @@ public class PlayerControl : MonoBehaviour
     {
         Vector2 moveDirection = new Vector2(InputManager.Instance.Move.x, InputManager.Instance.Move.y);
         transform.Translate(moveDirection * (speed * Time.deltaTime));
+
+        if (moveDirection.x > 0)
+            spriteRenderer.flipX = false;
+        else if(moveDirection.x < 0)
+            spriteRenderer.flipX = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
