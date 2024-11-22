@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e471e9f8a05d9e6469793c09dfb31391
+guid: fd036c6f808b02f46afab4d52d2fb7b9
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Retro Gaming
+  - Dogica Pixel
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

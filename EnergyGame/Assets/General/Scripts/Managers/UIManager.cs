@@ -40,8 +40,8 @@ public class UIManager : MonoBehaviour
     
     private void Awake()
     {
-        moneyText.text = $"Money: {money}";
-        energyText.text = $"Energy: {energy}";
+        moneyText.text = $"Dinheiro: {money}";
+        energyText.text = $"Energia: {energy}";
         tutorialBox.SetActive(true);
         tutorialBox.GetComponent<CanvasGroup>().alpha = 0;
     }
