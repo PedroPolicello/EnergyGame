@@ -157,12 +157,12 @@ public class UIManager : MonoBehaviour
     public void AddMoney(int value)
     {
         money += value;
-        moneyText.text = $"Money: {money}";
+        moneyText.text = $"Dinheiro: {money}";
     }
     public void RemoveMoney(int value)
     {
         money -= value;
-        moneyText.text = $"Money: {money}";
+        moneyText.text = $"Dinheiro: {money}";
     }
     
     #endregion
@@ -171,12 +171,12 @@ public class UIManager : MonoBehaviour
     public void AddEnergy(int value)
     {
         energy += value;
-        energyText.text = $"Energy: {energy}";
+        energyText.text = $"Energia: {energy}";
     }
     public void RemoveEnergy(int value)
     {
         energy -= value;
-        energyText.text = $"Energy: {energy}";
+        energyText.text = $"Energia: {energy}";
     }
     
     #endregion

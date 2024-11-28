@@ -222,7 +222,7 @@ public class MinigameController : MonoBehaviour
             biomassMinigame[i].SetActive(true);
         }
         
-        player.GetComponent<PlayerControl>().speed = 13;
+        player.GetComponent<PlayerControl>().speed = 11;
         cam.Follow = null;
         cam.LookAt = null;
     }

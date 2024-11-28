@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public float speed;
 
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     
     [Header("Sound Info")] 
     [SerializeField] private AudioClip trash;
@@ -23,6 +24,7 @@ public class PlayerControl : MonoBehaviour
         transform.position = new Vector3(0, 0.9f, 0);
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -39,6 +41,12 @@ public class PlayerControl : MonoBehaviour
             spriteRenderer.flipX = false;
         else if(moveDirection.x < 0)
             spriteRenderer.flipX = true;
+        
+        if(moveDirection.x != 0 || moveDirection.y != 0)
+            animator.SetBool("isWalking", true);
+        else
+            animator.SetBool("isWalking", false);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
